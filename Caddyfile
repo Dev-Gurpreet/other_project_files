@@ -1,0 +1,27 @@
+docreader-api-support.webnerserver.com:443 {
+        reverse_proxy 89.117.63.251 185.209.229.122 {
+                header_up Host {upstream_hostport}
+                lb_policy least_conn
+                lb_try_duration 3s
+                lb_try_interval 1s
+                fail_duration 30s
+        }
+        log {
+                output file /var/log/caddy/access.log {
+                roll_size 1mb
+                roll_keep 4
+                roll_keep_for 24h
+                }
+        }
+}
+
+89.117.63.251:443 {
+        reverse_proxy 0.0.0.0:8000
+        log {
+                output file /var/log/caddy/ip-access.log {
+                roll_size 1mb
+                roll_keep 4
+                roll_keep_for 24h
+                }
+        }
+}

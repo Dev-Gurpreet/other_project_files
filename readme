@@ -1,0 +1,29 @@
+#refer the sample files:
+
+file location : /etc/caddy/Caddyfile
+
+sudo systemctl restart caddy
+sudo systemctl status caddy
+sudo systemctl reload caddy
+
+
+
+
+
+file location : /etc/systemd/system/gunicorn.service
+sudo systemctl status gunicorn.service
+sudo systemctl start gunicorn.service
+sudo systemctl restart gunicorn.service
+
+
+
+
+sudo apt-get install rabbitmq-server -y --fix-missing
+
+
+celery commands:
+pip install Celery
+pkill -9 -f 'app.celery_worker.celery_app worker'
+celery -A app.celery_worker.celery_app worker --loglevel=INFO --concurrency=5 &disown
+# In app/main.py file:
+    from app.celery_worker import  detect_form_version_and_page

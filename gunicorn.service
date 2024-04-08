@@ -1,0 +1,14 @@
+Description=Gunicorn Web Server
+After=network.target
+
+[Service]
+User=gurpreet
+Group=gurpreet
+WorkingDirectory=/home/gurpreet/projects/docreader_api_support
+Environment="PATH=/home/gurpreet/projects/docreader_api_support/env/bin:/usr/bin:/bin"
+ExecStart=/home/gurpreet/projects/docreader_api_support/env/bin/gunicorn --config /home/gurpreet/projects/docreader_api_support/gunicorn.py app.main:>
+
+[Install]
+WantedBy=multi-user.target
+
+
